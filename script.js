@@ -1,21 +1,41 @@
-let i = 0;
+let buttonsIndex = 0;
 
-document.querySelectorAll(".container button").forEach((button) => {
-  button.addEventListener("click", function () {
-    if (i % 2 == 0) {
-      this.textContent = "X";
-    } else {
-      this.textContent = "0";
+function playGround() {
+  const buttonContainer = document.getElementById("playground");
+  for (let i = 1; i <= 9; ++i) {
+    const createButton = document.createElement("button");
+    createButton.type = "button";
+    createButton.id = i.toString();
+    createButton.className = "btn btn-primary";
+    createButton.style.width = "100px";
+    createButton.style.height = "50px";
+    createButton.style.margin = "5px";
+    buttonContainer.appendChild(createButton);
+    if (i % 3 == 0) {
+      const lineBreak = document.createElement("br");
+      buttonContainer.appendChild(lineBreak);
     }
-    ++i;
-    let winner = checkWinner();
-    if (winner) {
-      alert(winner + " won!");
-    } else if (isDraw()) {
-      alert("Draw!");
-    }
+  }
+}
+
+function buttonInteraction() {
+  document.querySelectorAll(".container button").forEach((button) => {
+    button.addEventListener("click", function () {
+      if (buttonsIndex % 2 == 0) {
+        this.textContent = "X";
+      } else {
+        this.textContent = "0";
+      }
+      ++buttonsIndex;
+      let winner = checkWinner();
+      if (winner) {
+        alert(winner + " won!");
+      } else if (isDraw()) {
+        alert("Draw!");
+      }
+    });
   });
-});
+}
 
 function checkWinner() {
   const winningCombinations = [
@@ -43,9 +63,14 @@ function checkWinner() {
 function isDraw() {
   const buttons = document.querySelectorAll(".container button");
   for (let i = 0; i < buttons.length; ++i) {
-    if(buttons[i].textContent == "") {
+    if (buttons[i].textContent == "") {
       return false;
     }
   }
   return true;
+}
+
+function startGame() {
+  playGround();
+  buttonInteraction();
 }
