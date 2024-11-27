@@ -1,20 +1,22 @@
 let buttonsIndex = 0;
+let nrOfButtons = 1;
 
 function playGround() {
   const buttonContainer = document.getElementById("playground");
-  for (let i = 1; i <= 9; ++i) {
-    const createButton = document.createElement("button");
-    createButton.type = "button";
-    createButton.id = i.toString();
-    createButton.className = "btn btn-primary";
-    createButton.style.width = "100px";
-    createButton.style.height = "50px";
-    createButton.style.margin = "5px";
-    buttonContainer.appendChild(createButton);
-    if (i % 3 == 0) {
-      const lineBreak = document.createElement("br");
-      buttonContainer.appendChild(lineBreak);
+  for (let i = 0; i < 3; ++i) {
+    for (let j = 0; j < 3; ++j) {
+      const createButton = document.createElement("button");
+      createButton.type = "button";
+      createButton.id = nrOfButtons.toString();
+      createButton.className = "btn btn-primary";
+      createButton.style.width = "100px";
+      createButton.style.height = "50px";
+      createButton.style.margin = "5px";
+      buttonContainer.appendChild(createButton);
+      ++nrOfButtons;
     }
+    const lineBreak = document.createElement("br");
+    buttonContainer.appendChild(lineBreak);
   }
 }
 
